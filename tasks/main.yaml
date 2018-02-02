@@ -1,0 +1,50 @@
+---
+- name: Install collectd
+  become: yes
+  become_user: root
+  apt:
+    pkg: "{{ item }}"
+    state: latest
+  with_items:
+    - collectd
+
+- name: Copy main config file
+  become: yes
+  become_user: root
+  template:
+    src: "templates/etc/collectd/collectd.conf.j2"
+    dest: "/etc/collectd/collectd.conf"
+    mode: 0644
+    owner: root
+    group: root
+
+- name: Create /etc/collectd/collectd.conf.d
+  become: yes
+  become_user: root
+  file:
+      path=/etc/collectd/collectd.conf.d
+      state=directory
+
+- name: Copy collectd.conf
+  become: yes
+  become_user: root
+  template:
+    src: "templates/etc/collectd/collectd.conf.d/{{ item }}.conf"
+    dest: "/etc/collectd/collectd.conf.d/{{ item }}.conf"
+    mode: 0644
+    owner: root
+    group: root
+  with_items:
+    "{{ collectd_scripts }}"
+
+- name: Restart collectd
+  become: yes
+  become_user: root
+  service:
+    name: "{{ item }}"
+    enabled: yes
+  with_items:
+    - collectd
+  notify:
+    - stop collectd
+    - start collectd

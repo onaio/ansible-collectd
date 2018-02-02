@@ -1,0 +1,14 @@
+---
+- name: stop collectd
+  become: true
+  become_user: "root"
+  service:
+    name: collectd
+    state: stopped
+
+- name: start collectd
+  become: true
+  become_user: "root"
+  service:
+    name: collectd
+    state: started
