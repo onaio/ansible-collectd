@@ -13,12 +13,15 @@ None currently.
 ### Other Default variables are listed below:
 
     # General/Graphite
+    # if collectd_server_mode is true server specific tasks like copying the main collectd config
+    # will be performed. Otherwise currently it's just the scripts in collectd_scripts will be copied
+    collectd_server_mode: false
     collectd_graphite_server_ip: "127.0.0.1"
     collectd_graphite_server_port: 2003
     collectd_graphite_server_protocol: "tcp"
     collectd_server_hostname: "localhost"
-    collectd_client_org: "ona"
-    collectd_scripts: ["graphite", "cpu", "disk", "load", "memory"]
+    collectd_server_owner: "ona"
+    collectd_scripts: []
     
     # RabbitMQ
     collectd_rabbitmq_admin_user: "admin"
