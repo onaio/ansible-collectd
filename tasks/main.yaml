@@ -8,15 +8,8 @@
   with_items:
     - collectd
 
-- name: Copy main config file
-  become: yes
-  become_user: root
-  template:
-    src: "templates/etc/collectd/collectd.conf.j2"
-    dest: "/etc/collectd/collectd.conf"
-    mode: 0644
-    owner: root
-    group: root
+- include_tasks: server_mode.yaml
+  when: collectd_server_mode == true
 
 - name: Create /etc/collectd/collectd.conf.d
   become: yes
