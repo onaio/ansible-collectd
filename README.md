@@ -21,6 +21,7 @@ None currently.
     collectd_graphite_server_protocol: "tcp"
     collectd_server_hostname: "localhost"
     collectd_server_owner: "ona"
+    collectd_server_type: "generic"
     collectd_scripts: []
     
     # RabbitMQ
