@@ -7,6 +7,8 @@
     state: latest
   with_items:
     - collectd
+  notify:
+   - restart collectd
 
 - include_tasks: server_mode.yaml
   when: collectd_server_mode == true
@@ -29,15 +31,12 @@
     group: root
   with_items:
     "{{ collectd_scripts }}"
+  notify:
+   - restart collectd
 
-- name: Restart collectd
+- name: Enable the collectd service
   become: yes
   become_user: root
   service:
-    name: "{{ item }}"
+    name: collectd
     enabled: yes
-  with_items:
-    - collectd
-  notify:
-    - stop collectd
-    - start collectd

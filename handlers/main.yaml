@@ -12,3 +12,10 @@
   service:
     name: collectd
     state: started
+
+- name: restart collectd
+  become: true
+  become_user: "root"
+  service:
+    name: collectd
+    state: restarted
