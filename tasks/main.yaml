@@ -13,6 +13,9 @@
 - include_tasks: server_mode.yaml
   when: collectd_server_mode == true
 
+- include_tasks: app_mode.yaml
+  when: collectd_server_mode == false
+
 - name: Create /etc/collectd/collectd.conf.d
   become: yes
   become_user: root

@@ -1,0 +1,3 @@
+---
+server_monitoring_env_dir: "/etc/profile.d/"
+server_monitoring_env_file: "server-monitoring.sh"

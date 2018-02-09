@@ -10,3 +10,32 @@
     group: root
   notify:
    - restart collectd
+
+- name: Make sure {{ server_monitoring_env_dir }} exists
+  become: yes
+  become_user: root
+  file:
+    path: "{{ server_monitoring_env_dir }}"
+    state: directory
+
+- name: Copy {{ server_monitoring_env_file }}
+  become: yes
+  become_user: root
+  copy:
+    src: files/server_monitoring_env_dir/server_monitoring_env_file
+    dest: "{{ server_monitoring_env_dir }}/{{ server_monitoring_env_file }}"
+    owner: root
+    group: root
+    mode: "0750"
+
+- name: Copy the server-monitoring monit config
+  become: yes
+  become_user: root
+  template:
+    src: "templates/etc/collectd/collectd.conf.d/server-monitoring.conf"
+    dest: "/etc/collectd/collectd.conf.d/server-monitoring.conf"
+    mode: 0644
+    owner: root
+    group: root
+  notify:
+   - restart collectd
