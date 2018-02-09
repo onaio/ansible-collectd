@@ -1,7 +1,7 @@
 ---
 - name: Types DB
   lineinfile:
-    dest: /etc/profile.d/server-monitoring.sh
+    dest: "{{ monitored_apps_env_dir }}/{{ monitored_apps_env_file }}"
     regexp: '^{{ monitored_apps_env_var }}\+=\("{{ collectd_deployed_app_name }};.+"\)'
     line: "{{ monitored_apps_env_var }}+=(\"{{ collectd_deployed_app_name }};{{ collectd_deployed_app_version }}\")"
     state: present
