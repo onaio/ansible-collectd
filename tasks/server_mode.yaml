@@ -28,6 +28,23 @@
     group: root
     mode: "0755"
 
+- name: Make sure the plugin dir exists
+  become: yes
+  become_user: root
+  file:
+    path: /usr/lib/collectd/plugins
+    state: directory
+
+- name: Copy the server-monitoring plugin file
+  become: yes
+  become_user: root
+  template:
+    src: "templates/usr/lib/collectd/plugins/monitored-apps.sh"
+    dest: "/usr/lib/collectd/plugins/monitored-apps.sh"
+    mode: 0755
+    owner: root
+    group: root
+
 - name: Copy the server-monitoring monit config
   become: yes
   become_user: root
