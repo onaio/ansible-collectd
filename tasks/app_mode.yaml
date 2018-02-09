@@ -2,6 +2,6 @@
 - name: Types DB
   lineinfile:
     dest: /etc/profile.d/server-monitoring.sh
-    regexp: "^SERVER_MONITORING_RUNNING_APPS+=\(\"{{ collectd_deployed_app_name }};.*\"\)$"
-    line: "SERVER_MONITORING_RUNNING_APPS+=(\"{{ collectd_deployed_app_name }};{{ collectd_deployed_app_version }}\")"
+    regexp: '^{{ monitored_apps_env_var }}\+=\("{{ collectd_deployed_app_name }};.+"\)'
+    line: "{{ monitored_apps_env_var }}+=(\"{{ collectd_deployed_app_name }};{{ collectd_deployed_app_version }}\")"
     state: present

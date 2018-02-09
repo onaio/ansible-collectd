@@ -1,3 +1,4 @@
 ---
-server_monitoring_env_dir: "/etc/profile.d/"
-server_monitoring_env_file: "server-monitoring.sh"
+monitored_apps_env_dir: "/etc/profile.d/"
+monitored_apps_env_file: "monitored-apps.sh"
+monitored_apps_env_var: "MONITORED_APPS"
