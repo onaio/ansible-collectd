@@ -4,6 +4,8 @@
     dest: "/usr/share/collectd/monitored-apps.db"
     line: "{{ collectd_deployed_app_name }} value:ABSOLUTE:0:U"
     state: present
+  notify:
+   - restart collectd
 
 - name: Add monitored app to env file
   lineinfile:
