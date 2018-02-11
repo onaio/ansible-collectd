@@ -11,6 +11,14 @@
   notify:
    - restart collectd
 
+- name: Make sure /usr/share/collectd/monitored-apps.db exists
+  become: yes
+  become_user: root
+  file:
+    path: /usr/share/collectd/monitored-apps.db
+    state: touch
+    mode: "0744"
+
 - name: Make sure {{ monitored_apps_env_dir }} exists
   become: yes
   become_user: root

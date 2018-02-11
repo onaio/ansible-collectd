@@ -9,6 +9,6 @@ do
   do
     name=${currentApp%;*}
     version=${currentApp#*;}
-    echo "PUTVAL \"$host/monitored-apps/$name/$version\" interval=$interval N:U"
+    echo "PUTVAL \"$host/monitored-apps/$name\" interval=$interval N:1"
   done
 done

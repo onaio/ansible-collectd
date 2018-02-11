@@ -1,5 +1,11 @@
 ---
-- name: Types DB
+- name: Add the app name to the monitored-apps types db
+  lineinfile:
+    dest: "/usr/share/collectd/monitored-apps.db"
+    line: "{{ collectd_deployed_app_name }} value:ABSOLUTE:0:U"
+    state: present
+
+- name: Add monitored app to env file
   lineinfile:
     dest: "{{ monitored_apps_env_dir }}/{{ monitored_apps_env_file }}"
     regexp: '^{{ monitored_apps_env_var }}\+=\("{{ collectd_deployed_app_name }};.+"\)'
