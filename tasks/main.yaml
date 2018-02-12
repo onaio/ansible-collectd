@@ -3,10 +3,7 @@
   become: yes
   become_user: root
   apt:
-    pkg: "{{ item }}"
-    state: latest
-  with_items:
-    - collectd
+    name: "collectd={{ collectd_version }}"
   notify:
    - restart collectd
 

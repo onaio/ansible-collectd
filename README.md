@@ -13,6 +13,7 @@ None currently.
 ### Other Default variables are listed below:
 
     # General/Graphite
+    collectd_version: "5.5.*"
     # if collectd_server_mode is true server specific tasks like copying the main collectd config
     # will be performed. Otherwise currently it's just the scripts in collectd_scripts will be copied
     collectd_server_mode: false
