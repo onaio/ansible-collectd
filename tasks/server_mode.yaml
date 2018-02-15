@@ -35,6 +35,8 @@
     owner: root
     group: root
     mode: "0755"
+  notify:
+   - restart collectd
 
 - name: Make sure the plugin dir exists
   become: yes

@@ -13,3 +13,5 @@
     regexp: '^{{ monitored_apps_env_var }}\+=\("{{ collectd_deployed_app_name }};.+"\)'
     line: "{{ monitored_apps_env_var }}+=(\"{{ collectd_deployed_app_name }};{{ collectd_deployed_app_version }}\")"
     state: present
+  notify:
+   - restart collectd
