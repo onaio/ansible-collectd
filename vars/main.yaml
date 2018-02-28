@@ -1,4 +1,4 @@
 ---
-monitored_apps_env_dir: "/etc/profile.d/"
-monitored_apps_env_file: "monitored-apps.sh"
+monitored_apps_env_dir: "/usr/lib/collectd/plugins"
+monitored_apps_env_file: "monitored-apps-list.sh"
 monitored_apps_env_var: "MONITORED_APPS"
