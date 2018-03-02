@@ -7,10 +7,10 @@
   notify:
    - restart collectd
 
-- include_tasks: server_mode.yaml
+- include_tasks: server_mode.yml
   when: collectd_server_mode == true
 
-- include_tasks: app_mode.yaml
+- include_tasks: app_mode.yml
   when: collectd_server_mode == false
 
 - name: Create /etc/collectd/collectd.conf.d
