@@ -4,6 +4,7 @@
   become_user: root
   apt:
     name: "collectd={{ collectd_version }}"
+    update_cache: yes
   notify:
    - restart collectd
 
