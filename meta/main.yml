@@ -11,3 +11,12 @@ galaxy_info:
         - xenial
   categories:
     - collectd
+
+dependencies:
+ - role: geerlingguy.java
+   become: true
+   become_user: "root"
+   java_packages: "{{ collectd_java_packages }}"
+   when: collect_install_java
+   tags:
+    - java

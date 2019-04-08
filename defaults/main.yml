@@ -17,3 +17,8 @@ collectd_rabbitmq_admin_user: "admin"
 collectd_rabbitmq_admin_password: "admin"
 collectd_rabbitmq_management_host: "localhost"
 collectd_rabbitmq_management_port: 15672
+
+# Java
+collect_install_java: false
+collectd_java_packages:
+ - openjdk-8-jre-headless
