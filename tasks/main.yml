@@ -9,10 +9,10 @@
    - restart collectd
 
 - include_tasks: server_mode.yml
-  when: collectd_server_mode == true
+  when: collectd_server_mode
 
 - include_tasks: app_mode.yml
-  when: collectd_server_mode == false
+  when: not collectd_server_mode
 
 - name: Create /etc/collectd/collectd.conf.d
   become: yes
