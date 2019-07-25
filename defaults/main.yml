@@ -11,7 +11,7 @@ collectd_server_owner: "ona"
 collectd_server_type: "generic"
 collectd_scripts: []
 collectd_user: "{{ ansible_ssh_user }}"
-collectd_nginx_port: 2182
+collectd_nginx_port: 80
 
 # RabbitMQ
 collectd_rabbitmq_admin_user: "admin"
