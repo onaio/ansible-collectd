@@ -9,7 +9,7 @@ collectd_graphite_server_protocol: "tcp"
 collectd_server_owner: "ona"
 collectd_server_type: "generic"
 collectd_scripts: []
-collectd_user: "{{ ansible_ssh_user }}"
+collectd_user: "{{ ansible_user }}"
 
 # RabbitMQ
 collectd_rabbitmq_admin_user: "admin"
