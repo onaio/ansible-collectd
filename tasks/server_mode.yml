@@ -18,6 +18,8 @@
     path: /usr/share/collectd/monitored-apps.db
     state: touch
     mode: "0744"
+    modification_time: preserve
+    access_time: preserve
 
 - name: Make sure {{ monitored_apps_env_dir }} exists
   become: true
