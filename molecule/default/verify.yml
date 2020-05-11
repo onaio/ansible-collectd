@@ -4,6 +4,16 @@
 - name: Verify
   hosts: all
   tasks:
-    - name: Example assertion
+    - name: Run systemctl is-enabled on the collectd service
+      command: systemctl is-enabled collectd.service
+      register: _service_is_enabled_output
+
+    - name: Run systemctl status on the collectd service
+      command: systemctl is-enabled collectd.service
+      register: _service_status_output
+
+    - name: Verify that the service is OK
       assert:
-        that: true
+        that:
+          - _service_is_enabled_output.rc == 0
+          - _service_status_output.rc == 0
