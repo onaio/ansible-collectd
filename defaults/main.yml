@@ -1,3 +1,4 @@
+---
 # General/Graphite
 collectd_version: "5.4.0-3ubuntu2.2"
 # if collectd_server_mode is true server specific tasks like copying the main collectd config

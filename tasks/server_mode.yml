@@ -1,6 +1,6 @@
 ---
 - name: Copy main config file
-  become: yes
+  become: true
   become_user: root
   template:
     src: "templates/etc/collectd/collectd.conf.j2"
@@ -9,10 +9,10 @@
     owner: root
     group: root
   notify:
-   - restart collectd
+    - restart collectd
 
 - name: Make sure /usr/share/collectd/monitored-apps.db exists
-  become: yes
+  become: true
   become_user: root
   file:
     path: /usr/share/collectd/monitored-apps.db
@@ -20,14 +20,14 @@
     mode: "0744"
 
 - name: Make sure {{ monitored_apps_env_dir }} exists
-  become: yes
+  become: true
   become_user: root
   file:
     path: "{{ monitored_apps_env_dir }}"
     state: directory
 
 - name: Copy {{ monitored_apps_env_file }}
-  become: yes
+  become: true
   become_user: root
   template:
     src: templates/monitored_apps_env_dir/monitored_apps_env_file
@@ -36,17 +36,17 @@
     group: root
     mode: "0755"
   notify:
-   - restart collectd
+    - restart collectd
 
 - name: Make sure the plugin dir exists
-  become: yes
+  become: true
   become_user: root
   file:
     path: /usr/lib/collectd/plugins
     state: directory
 
 - name: Copy the server-monitoring plugin file
-  become: yes
+  become: true
   become_user: root
   template:
     src: "templates/usr/lib/collectd/plugins/monitored-apps.sh"
@@ -56,7 +56,7 @@
     group: root
 
 - name: Copy the server-monitoring monit config
-  become: yes
+  become: true
   become_user: root
   template:
     src: "templates/etc/collectd/collectd.conf.d/monitored-apps.conf"
@@ -65,4 +65,4 @@
     owner: root
     group: root
   notify:
-   - restart collectd
+    - restart collectd

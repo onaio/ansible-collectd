@@ -1,12 +1,12 @@
 ---
 - name: Install collectd
-  become: yes
+  become: true
   become_user: root
   apt:
     name: "collectd={{ collectd_version }}"
-    update_cache: yes
+    update_cache: true
   notify:
-   - restart collectd
+    - restart collectd
 
 - include_tasks: server_mode.yml
   when: collectd_server_mode == true
@@ -15,14 +15,14 @@
   when: collectd_server_mode == false
 
 - name: Create /etc/collectd/collectd.conf.d
-  become: yes
+  become: true
   become_user: root
   file:
-      path=/etc/collectd/collectd.conf.d
-      state=directory
+    path=/etc/collectd/collectd.conf.d
+    state=directory
 
 - name: Copy collectd.conf
-  become: yes
+  become: true
   become_user: root
   template:
     src: "templates/etc/collectd/collectd.conf.d/{{ item }}.conf"
@@ -33,11 +33,11 @@
   with_items:
     "{{ collectd_scripts }}"
   notify:
-   - restart collectd
+    - restart collectd
 
 - name: Enable the collectd service
-  become: yes
+  become: true
   become_user: root
   service:
     name: collectd
-    enabled: yes
+    enabled: true
