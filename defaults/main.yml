@@ -6,11 +6,10 @@ collectd_server_mode: false
 collectd_graphite_server_ip: "127.0.0.1"
 collectd_graphite_server_port: 2003
 collectd_graphite_server_protocol: "tcp"
-collectd_server_hostname: "localhost"
 collectd_server_owner: "ona"
 collectd_server_type: "generic"
 collectd_scripts: []
-collectd_user: "{{ ansible_ssh_user }}"
+collectd_user: "{{ ansible_user }}"
 
 # RabbitMQ
 collectd_rabbitmq_admin_user: "admin"
