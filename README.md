@@ -1,4 +1,4 @@
-collectd
+collectd  [![Build Status](https://github.com/onaio/ansible-collectd/workflows/CI/badge.svg)](https://github.com/onaio/ansible-collectd/actions?query=workflow%3ACI)
 ========
 
 Use this role to install and configure collectd.
