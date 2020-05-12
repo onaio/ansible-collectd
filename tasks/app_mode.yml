@@ -5,7 +5,7 @@
     line: "{{ collectd_deployed_app_name }} value:ABSOLUTE:0:U"
     state: present
   notify:
-   - restart collectd
+    - restart collectd
 
 - name: Add monitored app to env file
   lineinfile:
@@ -14,4 +14,4 @@
     line: "{{ monitored_apps_env_var }}+=(\"{{ collectd_deployed_app_name }};{{ collectd_deployed_app_version }}\")"
     state: present
   notify:
-   - restart collectd
+    - restart collectd

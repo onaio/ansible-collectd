@@ -1,13 +1,17 @@
 ---
 galaxy_info:
+  role_name: "collectd"
   author: Ona Engineering
-  description: Installs collectd
-  min_ansible_version: 2.0
-  license: Apache2
+  description: Installs and configures collectd
+  company: Ona Systems Inc
+  license: Apache-2.0
+  min_ansible_version: 2.8
+  galaxy_tags:
+    - collectd
   platforms:
     - name: Ubuntu
       versions:
-        - trusty
-        - xenial
-  categories:
-    - collectd
+        - 16.04
+        - 18.04
+
+dependencies: []

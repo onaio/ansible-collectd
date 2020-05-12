@@ -1,0 +1,11 @@
+---
+- name: Converge
+  hosts: all
+  vars:
+    ansible_user: root
+  tasks:
+    - name: "Run role in install mode"
+      include_role:
+        name: "ansible-collectd"
+      vars:
+        collectd_server_mode: true
