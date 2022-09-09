@@ -11,7 +11,7 @@
 
 # As of the time of this change collectd was not present for Ubuntu 22.04
 # This step uses a proposed change to update collectd for Ubuntu 22.04 and
-# may support all functionality
+# may not support all functionality
 # Conversation: https://bugs.launchpad.net/ubuntu/+source/collectd/+bug/1971093
 - name: Download collectd-core package
   get_url:
