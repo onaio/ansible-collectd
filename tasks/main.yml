@@ -17,7 +17,7 @@
   get_url:
     url: http://launchpadlibrarian.net/587473820/collectd-core_5.12.0-9_amd64.deb
     dest: /tmp/collectd-core_5.12.0-9_amd64.deb
-  when: ansible_distribution_version is version("22.04", "=")
+  when: ansible_distribution_version == "22.04"
 
 - name: Ensure collectd-core is installed
   apt:
@@ -25,13 +25,13 @@
     state: present
   become: true
   become_user: root
-  when: ansible_distribution_version is version("22.04", "=")
+  when: ansible_distribution_version == "22.04"
 
 - name: Download collectd package
   get_url:
     url: http://launchpadlibrarian.net/587473817/collectd_5.12.0-9_amd64.deb
     dest: /tmp/collectd_5.12.0-9_amd64.deb
-  when: ansible_distribution_version is version("22.04", "=")
+  when: ansible_distribution_version == "22.04"
 
 - name: Ensure collectd is installed
   apt:
@@ -41,7 +41,7 @@
   become_user: root
   notify:
     - restart collectd
-  when: ansible_distribution_version is version("22.04", "=")
+  when: ansible_distribution_version == "22.04"
 
 - include_tasks: server_mode.yml
   when: collectd_server_mode
