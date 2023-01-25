@@ -7,6 +7,41 @@
     update_cache: true
   notify:
     - restart collectd
+  when: ansible_distribution_version is version("22.04", "<")
+
+# As of the time of this change collectd was not present for Ubuntu 22.04
+# This step uses a proposed change to update collectd for Ubuntu 22.04 and
+# may not support all functionality
+# Conversation: https://bugs.launchpad.net/ubuntu/+source/collectd/+bug/1971093
+- name: Download collectd-core package
+  get_url:
+    url: http://ftp.ubuntu.com/ubuntu/ubuntu/pool/universe/c/collectd/collectd-core_5.12.0-11_amd64.deb
+    dest: /tmp/collectd-core_5.12.0-11_amd64.deb
+  when: ansible_distribution_version == "22.04"
+
+- name: Ensure collectd-core is installed
+  apt:
+    deb: /tmp/collectd-core_5.12.0-11_amd64.deb
+    state: present
+  become: true
+  become_user: root
+  when: ansible_distribution_version == "22.04"
+
+- name: Download collectd package
+  get_url:
+    url: http://ftp.ubuntu.com/ubuntu/ubuntu/pool/universe/c/collectd/collectd_5.12.0-11_amd64.deb
+    dest: /tmp/collectd_5.12.0-11_amd64.deb
+  when: ansible_distribution_version == "22.04"
+
+- name: Ensure collectd is installed
+  apt:
+    deb: /tmp/collectd_5.12.0-11_amd64.deb
+    state: present
+  become: true
+  become_user: root
+  notify:
+    - restart collectd
+  when: ansible_distribution_version == "22.04"
 
 - include_tasks: server_mode.yml
   when: collectd_server_mode
