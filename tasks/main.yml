@@ -15,13 +15,13 @@
 # Conversation: https://bugs.launchpad.net/ubuntu/+source/collectd/+bug/1971093
 - name: Download collectd-core package
   get_url:
-    url: http://launchpadlibrarian.net/587473820/collectd-core_5.12.0-9_amd64.deb
-    dest: /tmp/collectd-core_5.12.0-9_amd64.deb
+    url: http://ftp.ubuntu.com/ubuntu/ubuntu/pool/universe/c/collectd/collectd-core_5.12.0-11_amd64.deb
+    dest: /tmp/collectd-core_5.12.0-11_amd64.deb
   when: ansible_distribution_version == "22.04"
 
 - name: Ensure collectd-core is installed
   apt:
-    deb: /tmp/collectd-core_5.12.0-9_amd64.deb
+    deb: /tmp/collectd-core_5.12.0-11_amd64.deb
     state: present
   become: true
   become_user: root
@@ -29,13 +29,13 @@
 
 - name: Download collectd package
   get_url:
-    url: http://launchpadlibrarian.net/587473817/collectd_5.12.0-9_amd64.deb
-    dest: /tmp/collectd_5.12.0-9_amd64.deb
+    url: http://ftp.ubuntu.com/ubuntu/ubuntu/pool/universe/c/collectd/collectd_5.12.0-11_amd64.deb
+    dest: /tmp/collectd_5.12.0-11_amd64.deb
   when: ansible_distribution_version == "22.04"
 
 - name: Ensure collectd is installed
   apt:
-    deb: /tmp/collectd_5.12.0-9_amd64.deb
+    deb: /tmp/collectd_5.12.0-11_amd64.deb
     state: present
   become: true
   become_user: root
