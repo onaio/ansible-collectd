@@ -9,6 +9,18 @@
     - restart collectd
   when: ansible_distribution_version is version("22.04", "<")
 
+# Ubuntu 24.04 ships collectd 5.12, so the version pin for older releases does
+# not apply
+- name: Install collectd from the Ubuntu archive
+  become: true
+  become_user: root
+  apt:
+    name: collectd
+    update_cache: true
+  notify:
+    - restart collectd
+  when: ansible_distribution_version is version("24.04", ">=")
+
 # As of the time of this change collectd was not present for Ubuntu 22.04
 # This step uses a proposed change to update collectd for Ubuntu 22.04 and
 # may not support all functionality
