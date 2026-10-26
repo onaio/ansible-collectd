@@ -6,6 +6,6 @@
   tasks:
     - name: "Run role in install mode"
       include_role:
-        name: "ansible-collectd"
+        name: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"
       vars:
         collectd_server_mode: true
