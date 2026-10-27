@@ -2,42 +2,58 @@
 - name: Install collectd
   become: true
   become_user: root
-  apt:
+  ansible.builtin.apt:
     name: "collectd={{ collectd_version }}"
     update_cache: true
   notify:
-    - restart collectd
+    - Restart collectd
+  when: ansible_distribution_version is version("22.04", "<")
 
-- include_tasks: server_mode.yml
+# Ubuntu 22.04 and later ship collectd 5.12, so the version pin for older
+# releases does not apply. Recommends would pull in a Java runtime.
+- name: Install collectd from the Ubuntu archive
+  become: true
+  become_user: root
+  ansible.builtin.apt:
+    name: collectd
+    install_recommends: false
+    update_cache: true
+  notify:
+    - Restart collectd
+  when: ansible_distribution_version is version("22.04", ">=")
+
+- name: Configure collectd in server mode
+  ansible.builtin.include_tasks: server_mode.yml
   when: collectd_server_mode
 
-- include_tasks: app_mode.yml
+- name: Configure collectd in app mode
+  ansible.builtin.include_tasks: app_mode.yml
   when: not collectd_server_mode
 
 - name: Create /etc/collectd/collectd.conf.d
   become: true
   become_user: root
-  file:
-    path=/etc/collectd/collectd.conf.d
-    state=directory
+  ansible.builtin.file:
+    path: /etc/collectd/collectd.conf.d
+    state: directory
+    mode: "0755"
 
 - name: Copy collectd.conf
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: "templates/etc/collectd/collectd.conf.d/{{ item }}.conf"
     dest: "/etc/collectd/collectd.conf.d/{{ item }}.conf"
-    mode: 0644
+    mode: "0644"
     owner: root
     group: root
-  with_items:
-    "{{ collectd_scripts }}"
+  with_items: "{{ collectd_scripts }}"
   notify:
-    - restart collectd
+    - Restart collectd
 
 - name: Enable the collectd service
   become: true
   become_user: root
-  service:
+  ansible.builtin.service:
     name: collectd
     enabled: true

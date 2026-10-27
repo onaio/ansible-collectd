@@ -2,69 +2,71 @@
 - name: Copy main config file
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: "templates/etc/collectd/collectd.conf.j2"
     dest: "/etc/collectd/collectd.conf"
-    mode: 0644
+    mode: "0644"
     owner: root
     group: root
   notify:
-    - restart collectd
+    - Restart collectd
 
 - name: Make sure /usr/share/collectd/monitored-apps.db exists
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     path: /usr/share/collectd/monitored-apps.db
     state: touch
     mode: "0744"
     modification_time: preserve
     access_time: preserve
 
-- name: Make sure {{ monitored_apps_env_dir }} exists
+- name: Make sure the monitored apps environment directory exists
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     path: "{{ monitored_apps_env_dir }}"
     state: directory
+    mode: "0755"
 
 - name: Copy {{ monitored_apps_env_file }}
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: templates/monitored_apps_env_dir/monitored_apps_env_file
     dest: "{{ monitored_apps_env_dir }}/{{ monitored_apps_env_file }}"
     owner: root
     group: root
     mode: "0755"
   notify:
-    - restart collectd
+    - Restart collectd
 
 - name: Make sure the plugin dir exists
   become: true
   become_user: root
-  file:
+  ansible.builtin.file:
     path: /usr/lib/collectd/plugins
     state: directory
+    mode: "0755"
 
 - name: Copy the server-monitoring plugin file
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: "templates/usr/lib/collectd/plugins/monitored-apps.sh"
     dest: "/usr/lib/collectd/plugins/monitored-apps.sh"
-    mode: 0755
+    mode: "0755"
     owner: root
     group: root
 
 - name: Copy the server-monitoring monit config
   become: true
   become_user: root
-  template:
+  ansible.builtin.template:
     src: "templates/etc/collectd/collectd.conf.d/monitored-apps.conf"
     dest: "/etc/collectd/collectd.conf.d/monitored-apps.conf"
-    mode: 0644
+    mode: "0644"
     owner: root
     group: root
   notify:
-    - restart collectd
+    - Restart collectd
