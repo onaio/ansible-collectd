@@ -2,33 +2,16 @@
 extends: default
 
 rules:
+  comments:
+    min-spaces-from-content: 1
+  comments-indentation: false
   braces:
     max-spaces-inside: 1
-    level: error
-  brackets:
-    max-spaces-inside: 1
-    level: error
-  colons:
-    max-spaces-after: -1
-    level: error
-  commas:
-    max-spaces-after: -1
-    level: error
-  comments: enable
-  comments-indentation: enable
-  document-start: enable
-  empty-lines:
-    max: 1
-    level: error
-  hyphens:
-    level: error
-  indentation:
-    spaces: 2
-  key-duplicates: enable
-  line-length: disable
-  new-line-at-end-of-file: enable
-  new-lines:
-    type: unix
-  trailing-spaces: enable
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
+  line-length:
+    max: 160
   truthy:
+    allowed-values: ["true", "false"]
     check-keys: false
