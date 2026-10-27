@@ -37,6 +37,7 @@
     path: /etc/collectd/collectd.conf.d
     state: directory
     mode: "0755"
+
 - name: Copy collectd.conf
   become: true
   become_user: root
